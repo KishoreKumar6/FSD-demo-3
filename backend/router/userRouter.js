@@ -108,7 +108,7 @@ router.post("/password-reset", async (req, res) => {
     await user.save();
 
     // create a password reset link using the generated token
-    const resetLink = `http://localhost:3000/reset-password/${token}`;
+    const resetLink = `https://fsd-demo-3-2.onrender.com/reset-password/${token}`;
 
     // send the reset link to the user's mail (to, subject, text)
     await sendMail(
