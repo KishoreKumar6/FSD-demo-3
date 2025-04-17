@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
   }
 });
 // user login
-router.post("/login",async (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -143,7 +143,7 @@ router.post("/reset-password/:token", async (req, res) => {
     // Find user with a valid reset token
     const user = await User.findOne({
       resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() }
+      resetPasswordExpires: { $gt: Date.now() },
     });
     // if no user is found, return the error
 
@@ -153,7 +153,6 @@ router.post("/reset-password/:token", async (req, res) => {
       });
     }
 
-   
     // has the new password
     user.password = await bcrypt.hash(password, 10);
     user.resetPasswordToken = undefined;
@@ -167,7 +166,7 @@ router.post("/reset-password/:token", async (req, res) => {
       message: "Password reset successfull",
     });
   } catch (error) {
-    console.error("Reset password error:", error)
+    console.error("Reset password error:", error);
     res.status(400).json({
       error: "Invalid or expired token",
     });
