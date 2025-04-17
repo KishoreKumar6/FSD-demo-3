@@ -20,7 +20,7 @@ const RegisterForm = () => {
     setMessage(""); //clear the previous messages
 
     try {
-      const res = await fetch("http://localhost:5004/api/users/register", {
+      const res = await fetch("https://fsd-demo-3-2.onrender.com/api/users/register", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -50,6 +50,9 @@ const RegisterForm = () => {
 
   const nav = () => {
     navigate('/password-reset')
+  }
+  const login = () => {
+    navigate('/login')
   }
   return (
     <div className="bg-primary-subtle p-4 rounded">
@@ -98,6 +101,7 @@ const RegisterForm = () => {
           Register
         </button>
         <button className="mb-3 mt-3 btn btn-success" onClick={nav}>PasswordReset</button>
+        <button className="mb-3 mt-3 btn btn-success m-3 " onClick={login}>Login Page</button>
       </form>
     </div>
   );

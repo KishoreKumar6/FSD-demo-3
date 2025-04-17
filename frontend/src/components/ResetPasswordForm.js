@@ -18,7 +18,7 @@ const ResetPasswordForm = () => {
         setMessage(""); //clear the previous messages
 
         try {
-            const res = await fetch(`http://localhost:5004/api/users/password-reset/${token}`, {
+            const res = await fetch(`https://fsd-demo-3-2.onrender.com/api/users/reset-password/${token}`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

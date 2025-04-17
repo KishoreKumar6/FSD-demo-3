@@ -45,6 +45,40 @@ router.post("/register", async (req, res) => {
     });
   }
 });
+// user login
+router.post("/login",async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // check if the user there or not
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // check the password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+
+    // generate the JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(201).json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 //route for initiating the password reset, send the mail to your mailbox with the link to reset the password
 
@@ -106,26 +140,20 @@ router.post("/reset-password/:token", async (req, res) => {
   // verify the token
 
   try {
-    const decode = jwt.verify(token, process.env.JWT_SECRET);
-
-    // find the user by ID
-    const user = await User.findById(decode.userId);
-
+    // Find user with a valid reset token
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
     // if no user is found, return the error
 
     if (!user) {
       return res.status(400).json({
-        error: "user is not found",
+        error: "Password reset token is invalid or has expired",
       });
     }
 
-    // check if the token has expried
-    if (user.resetPasswordExpires < Date.now()) {
-      return res.status(400).json({
-        error: "Token has expired",
-      });
-    }
-
+   
     // has the new password
     user.password = await bcrypt.hash(password, 10);
     user.resetPasswordToken = undefined;
@@ -139,6 +167,7 @@ router.post("/reset-password/:token", async (req, res) => {
       message: "Password reset successfull",
     });
   } catch (error) {
+    console.error("Reset password error:", error)
     res.status(400).json({
       error: "Invalid or expired token",
     });

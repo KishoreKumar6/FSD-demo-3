@@ -3,6 +3,7 @@ import RegisterForm from "./components/Register";
 import PasswordReset from "./components/PasswordReset";
 import ResetPasswordForm from "./components/ResetPasswordForm";
 import "./App.css"
+import Login from "./components/Login";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<RegisterForm />} />
           <Route path="/password-reset" element={<PasswordReset />} />
           <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
 
