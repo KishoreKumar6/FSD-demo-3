@@ -45,26 +45,26 @@ const ResetPasswordForm = () => {
     // rendering the component
 
     return (
-        <div className="bg-primary-subtle p-4 rounded">
+        <div className="bg-yellow-300">
             <form onSubmit={handleSubmit}>
-                <h2 className="mb-5 text-primary text-center">Reset Password</h2>
+                <h2 className="mb-5 text-center fw-bold">Reset Password</h2>
                 {message && <div className="alert alert-success">{message}</div>}
                 {error && <div className="alert alert-danger">{error}</div>}
 
 
-                <div className="mb-3">
-                    <label className="form-label fw-bold">Password</label>
+                <div className="mb-3 text-center">
+                    <label className="form-label fw-bold m-3">Password</label>
                     <input
                         type="password"
                         placeholder="Reset your Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="form-control"
+                        className="bg-white rounded p-2"
                         required
                     />
                 </div>
-
-                <button type="submit" className="mb-3 mt-3 btn btn-success">Reset password</button>
+                <center>
+                <button type="submit" className="mb-3 text-center bg-orange-500 py-1 px-2 rounded text-white">Reset password</button></center>
             </form>
         </div>
     )

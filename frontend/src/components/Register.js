@@ -55,9 +55,9 @@ const RegisterForm = () => {
     navigate('/login')
   }
   return (
-    <div className="bg-primary-subtle p-4 rounded">
+    <div className="bg-yellow-300 p-4 text-center">
       <form onSubmit={handleSubmit}>
-        <h2 className="mb-5 text-primary text-center">Register</h2>
+        <h2 className="mb-5 fw-bold text-center">Register</h2>
         {message && <div className="alert alert-success">{message}</div>}
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -68,40 +68,40 @@ const RegisterForm = () => {
             placeholder="Enter your Name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="form-control"
+            className="bg-white rounded m-3 p-2"
             required
           />
         </div>
 
         <div className="mb-3">
-          <label className="form-label fw-bold">Email</label>
+          <label className="form-label fw-bold mr-9">Email</label>
           <input
             type="text"
             placeholder="Enter your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="form-control"
+            className="bg-white rounded m-3 p-2"
             required
           />
         </div>
 
         <div className="mb-3">
-          <label className="form-label fw-bold">Password</label>
+          <label className="form-label fw-bold m-2">Password</label>
           <input
             type="password"
             placeholder="Enter your Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="form-control"
+             className="bg-white rounded m-3 p-2"
             required
           />
         </div>
 
-        <button type="submit" className="mb-3 mt-3 m-3 btn btn-success">
+        <button type="submit" className="mb-3 mt-3 m-3 bg-orange-500 px-2 py-1 rounded text-white">
           Register
         </button>
-        <button className="mb-3 mt-3 btn btn-success" onClick={nav}>PasswordReset</button>
-        <button className="mb-3 mt-3 btn btn-success m-3 " onClick={login}>Login Page</button>
+        <button className="mb-3 mt-3 bg-orange-500 px-2 py-1 rounded text-white" onClick={nav}>PasswordReset</button>
+        <button className="mb-3 mt-3 m-3 bg-orange-500 px-2 py-1 rounded text-white" onClick={login}>Login Page</button>
       </form>
     </div>
   );
